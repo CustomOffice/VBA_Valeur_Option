@@ -1,5 +1,5 @@
-# VBA_Gen_Email
-Renvois la valeur associé à la propriété Tag de l'option sélectionnée dans un groupe d'option			
+# VBA_Valeur_Option
+Renvois la valeur associé à la propriété Tag de l'option sélectionnée dans un groupe d'option
 
 ##Lien vers le site
 http://customoffice.github.io/VBA_Valeur_Option/
