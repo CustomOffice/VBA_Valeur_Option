@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Vba valeur option : Renvois la valeur associé à la propriété Tag de l&#39;option sélectionnée dans un groupe d&#39;option    ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Vba valeur option</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/CustomOffice/VBA_Valeur_Option">View on GitHub</a>
+
+          <h1 id="project_title">Vba valeur option</h1>
+          <h2 id="project_tagline">Renvois la valeur associé à la propriété Tag de l&#39;option sélectionnée dans un groupe d&#39;option    </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/CustomOffice/VBA_Valeur_Option/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/CustomOffice/VBA_Valeur_Option/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="vba_option_valeur" class="anchor" href="#vba_option_valeur" aria-hidden="true"><span class="octicon octicon-link"></span></a>VBA_Option_Valeur</h1>
+
+<p>Renvois la valeur associé à la propriété Tag de l'option sélectionnée dans un groupe d'option         </p>
+
+<h2>
+<a id="instruction" class="anchor" href="#instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instruction</h2>
+
+<ul>
+<li>Soit créer un module dans votre projet vba et y copier/coller le code ci-dessous</li>
+<li>Soit télécharger le module (fichier *.bas) et l'inserer dans votre projet vba</li>
+</ul>
+
+<h2>
+<a id="code" class="anchor" href="#code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
+
+<div class="highlight highlight-bash"><pre><span class="pl-s"><span class="pl-pds">'</span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>TITRE <span class="pl-c1">:</span> Récupération de l<span class="pl-s"><span class="pl-pds">'</span>option sélectionné                                                    !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>DATE <span class="pl-c1">:</span> 17.04.15                                                                                 <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!                                                                                                !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>DESCRIPTION <span class="pl-c1">:</span> Renvois la valeur associé à la propriété Tag de l<span class="pl-s"><span class="pl-pds">'</span>option sélectionnée dans un   !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>groupe d<span class="pl-s"><span class="pl-pds">'</span>option                                                                                 !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>                                                                                                <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!REGLES :                                                                                        !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>- obj correspond au userform                                                                    <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!- groupe est le nom du groupe d<span class="pl-pds">'</span></span>option (propriété <span class="pl-s"><span class="pl-pds">"</span>GroupName<span class="pl-pds">"</span></span>), par défaut <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> dans VBA          <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="pl-s"></span>
+<span class="pl-s">Function valeur_option(ByRef obj, Optional groupe As String = "")</span>
+<span class="pl-s">    <span class="pl-pds">'</span></span>Déclaration des variables
+    Dim Ctrl As Control
+
+    <span class="pl-s"><span class="pl-pds">'</span>Paramètre de personnalisation</span>
+<span class="pl-s">    valeur_option = ""</span>
+<span class="pl-s">    <span class="pl-pds">'</span></span>Boucle sur tous les contrôles
+    For Each Ctrl In obj.Controls
+        <span class="pl-s"><span class="pl-pds">'</span>Vérifie qu<span class="pl-pds">'</span></span>il s<span class="pl-s"><span class="pl-pds">'</span>agit d<span class="pl-pds">'</span></span>un OptionButton
+        If TypeOf Ctrl Is MSForms.OptionButton Then
+            <span class="pl-s"><span class="pl-pds">'</span>Véfifie si l<span class="pl-pds">'</span></span>OptionButton fait partie d<span class="pl-s"><span class="pl-pds">'</span>un groupe nommé "GR1"</span>
+<span class="pl-s">             If Ctrl.GroupName = groupe Then</span>
+<span class="pl-s">                <span class="pl-pds">'</span></span>Renvoi le Tag de l<span class="pl-s"><span class="pl-pds">'</span>optionButton qui a la valeur True</span>
+<span class="pl-s">                If Ctrl.Value = True Then</span>
+<span class="pl-s">                    valeur_option = Ctrl.Tag</span>
+<span class="pl-s">                    <span class="pl-pds">'</span></span>Sort de la boucle (Il ne peut y a voir qu<span class="pl-s"><span class="pl-pds">'</span>une réponse à True)</span>
+<span class="pl-s">                    Exit For</span>
+<span class="pl-s">                End If</span>
+<span class="pl-s">            End If</span>
+<span class="pl-s">        End If</span>
+<span class="pl-s">    Next</span>
+<span class="pl-s">End Function</span></pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Vba valeur option maintained by <a href="https://github.com/CustomOffice">CustomOffice</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
